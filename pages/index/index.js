@@ -22,6 +22,8 @@ Page({
     timeInterval: null,
     flagOn: false,
     flags: 0,
+    endOfTheGame: false,
+    safeMinesGo: 0,
 
     onLoad: function() {
 
@@ -33,11 +35,14 @@ Page({
     },
 
     setGame: function() {
+
         this.drawMineField();
         this.createMinesMap();
         this.setMinesLeft();
         this.timeGoReset();
         this.timeGoClock();
+        this.endOfTheGame = false;
+        this.safeMinesGo = 0;
     },
 
     setMinesLeft: function() {
@@ -53,6 +58,11 @@ Page({
             self.setData({timesGo: self.timesGo});
             
         }, 1000);
+    },
+
+    timeGoStop: function() {
+    
+        clearInterval(this.timeInterval);
     },
 
     timeGoReset: function() {
@@ -113,7 +123,6 @@ Page({
             }
         }
         this.mineMapMapping = tmpMineMap;
-
     },
 
     drawMineField: function() {
@@ -144,7 +153,7 @@ Page({
         var x = parseInt(event.target.dataset.x);
         var y = parseInt(event.target.dataset.y);
         var value = parseInt(event.target.dataset.value);
-        console.log("value:" + value +" x:"+x +" y:"+y);
+        //console.log("value:" + value +" x:"+x +" y:"+y);
 
         //flag this field as mine.
         if (this.flagOn) {
@@ -158,25 +167,21 @@ Page({
         
         var valueMapping = this.mineMapMapping[x][y];
         //console.log(this.mineMapMapping);
-        console.log(valueMapping);
+        //console.log(valueMapping);
 
         if (valueMapping < 9) {
             this.mineMap[x][y] = valueMapping;
             this.setData({mineMap: this.mineMap});
+            this.safeMinesGo++;
+            console.log("Safe mine go: " + this.safeMinesGo);
+            if ((this.safeMinesGo + this.mineCount) == (this.rowCount * this.colCount)) {
+                this.success();
+            }
         }
 
         // When digg the mine.
         if (valueMapping == 9) {
-
-            wx.showModal({
-                title: 'Game Over',
-                content: '',
-                success: function(res) {
-                    if (res.confirm) {
-                        console.log('用户点击确定')
-                    }
-                }
-            })
+            this.failed();
         }
 
         // Open the fields with 0 mines arround.
@@ -185,6 +190,27 @@ Page({
             this.openZeroArround(x, y);
             this.setData({mineMap:this.mineMap});
         }
+    },
+
+    success: function() {
+
+        wx.showToast({
+            title: 'GOOD!',
+            duration: 3000
+        })
+        this.timeGoStop();
+        this.endOfTheGame = true;
+    },
+
+    failed: function() {
+        wx.showToast({
+            title: 'SORRY!',
+            duration: 3000
+        })
+
+        this.showAll();
+        this.timeGoStop();
+        this.endOfTheGame = true;
     },
 
     // Open the fields arround 0 field recursively.
@@ -197,13 +223,22 @@ Page({
                     && c >= 0 && c < this.colCount
                 && !(r === row && c === col) 
                 && this.mineMap[r][c] < 0) {
+
                     this.mineMap[r][c] = this.mineMapMapping[r][c];
+                    this.safeMinesGo++;
+
                     if (this.mineMapMapping[r][c] == 0) {
                         this.openZeroArround(r, c);
                     }
+
                 }
             }
         }
+        console.log("Safe mine go: " + this.safeMinesGo);
+        if ((this.safeMinesGo + this.mineCount) == (this.rowCount * this.colCount)) {
+            this.success();
+        }
+
     },
 
     flagSwitch: function(e) {
