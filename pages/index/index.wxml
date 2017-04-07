@@ -17,5 +17,8 @@
         </view>
     </view>
 </view>
+<view class="tips">
+    <text>- 点击 START 开始游戏，RESTART 重新开始\n- Switch 切换标志插旗</text>
+</view>
 
 

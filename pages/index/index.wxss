@@ -66,3 +66,11 @@
 .button-hover {
     background-color: LightGrey;
 }
+
+.tips {
+    margin-top: 50px;
+    padding: 0 0 0 20px;
+    font-size: 62.5%;
+    font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
+    color: #8d8d8d;
+}
