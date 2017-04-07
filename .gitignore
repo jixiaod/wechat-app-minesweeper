@@ -1,0 +1,5 @@
+.DB_Store
+*.swp
+*.log
+public/
+.deploy*/

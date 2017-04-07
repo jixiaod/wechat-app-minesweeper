@@ -10,10 +10,10 @@
     </view>
     <view class="footer">
         <view>
-            <button class="start-button" type="default" bindtap="setGame" hover-class="button-hover"> START </button>
+            <button class="start-button" type="primary" size="mini" bindtap="setGame" hover-class="button-hover">{{buttionText}}</button>
         </view>
         <view>
-            <switch bindchange="flagSwitch"/> Flag
+            <switch bindchange="flagSwitch"/>
         </view>
     </view>
 </view>

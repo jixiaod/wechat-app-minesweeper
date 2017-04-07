@@ -12,10 +12,10 @@ Page({
 
     mineMap: {},
     mineMapMapping: {},
-    rowCount: 10,
-    colCount: 10,
-    mineCount: 10,
-    minMineCount: 10,
+    rowCount: 8,
+    colCount: 8,
+    mineCount: 8,
+    minMineCount: 8,
     maxMineCount: 20,
     minesLeft: 0,
     timesGo: 0,
@@ -32,6 +32,10 @@ Page({
             timesGo: 0
         });
         this.drawMineField();
+        this.setData({
+            buttionText: 'START'
+        })
+
     },
 
     setGame: function() {
@@ -43,6 +47,10 @@ Page({
         this.timeGoClock();
         this.endOfTheGame = false;
         this.safeMinesGo = 0;
+        this.setData({
+            buttionText: 'RESTART'
+        })
+
     },
 
     setMinesLeft: function() {
@@ -195,7 +203,8 @@ Page({
     success: function() {
 
         wx.showToast({
-            title: 'GOOD!',
+            title: 'Good Job !',
+            image: '../images/icon/emoticon_happy.png',
             duration: 3000
         })
         this.timeGoStop();
@@ -204,7 +213,9 @@ Page({
 
     failed: function() {
         wx.showToast({
-            title: 'SORRY!',
+            title: 'Bomb !!!',
+            image: '../images/icon/emoticon_sad.png',
+            mask: true,
             duration: 3000
         })
 

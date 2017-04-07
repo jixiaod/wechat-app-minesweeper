@@ -14,7 +14,7 @@
 }
 
 .flex-item {
-    background: LightGrey;
+    background: #E6E9ED;
     margin: 1px;
     color: white;
     font-weight: bold;
@@ -26,16 +26,16 @@
 }
 
 .open {
-    background: green;
+    background: #3BAFDA;
 }
 
 .mine {
-    background: red;
+    background: #E9573F;
 }
 
 .flag {
     
-    background: blue;
+    background: #F6BB42;
 }
 
 .flex-item:before {
