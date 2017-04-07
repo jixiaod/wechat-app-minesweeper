@@ -5,7 +5,7 @@
     </view>
     <view wx:for="{{mineMap}}" wx:for-item="row" wx:for-index="i" class="flex-container">
         <button wx:for="{{row}}" wx:for-item="col" wx:for-index="j" class="flex-item {{col < 9 ? (col < 0 ? '':'open') : ((col > 9) ? 'flag' : 'mine')}}" bindtap="demining" data-x="{{i}}" data-y="{{j}}" data-value="{{col}}">
-            {{col < 9 ? (col < 0 ? '-':col) : ((col > 9) ? 'F' : 'M')}}
+            {{col < 9 ? (col < 0 ? '':col) : ((col > 9) ? 'F' : 'M')}}
         </button>
     </view>
     <view class="footer">

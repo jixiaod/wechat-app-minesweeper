@@ -1,3 +1,9 @@
+page {
+    width: 750rpx;
+    height: 100%;
+    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+}
+
 .wrapper {
     padding: 5px;
 }
@@ -21,7 +27,8 @@
     font-size: 14px;
     text-align: center;
     flex: 1 0 auto;
-    height: auto;
+    height: 90rpx;
+    width: 90rpx;
     font-family: "Lucida Console", Monaco, monospace
 }
 
@@ -57,7 +64,7 @@
 }
 
 .footer {
-    padding-top: 50px;
+    padding-top: 50rpx;
     display: flex;   
     justify-content: space-around;
     align-items: center;
@@ -68,9 +75,8 @@
 }
 
 .tips {
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 0 0 0 20px;
     font-size: 62.5%;
-    font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
     color: #8d8d8d;
 }
